@@ -1,20 +1,18 @@
-import logo from "./logo.svg";
-import React, { useState, useEffect, Fragment } from "react";
+import React from "react";
 import "./App.css";
-import Pokemon from "./components/Pokemon";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-
+import Home from "./pages/Home";
+import SinglePage from './pages/SinglePage'
 
 function App() {
-  
+ return (
+     <Router>
+       <Route exact path='/' component={Home}/>
+       <Route exact path='/pokemon/:pokemon' component={SinglePage}/>
+     </Router>
 
-  return (
-    <>
-      <h1>Pokedex</h1>
-
-      <Pokemon/>
-    </>
-  );
+ );
 }
 
 export default App;
