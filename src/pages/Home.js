@@ -7,10 +7,10 @@ export default function Home() {
      const [nextPage, setNextPage] = useState("");
      const [prevPage, setPrevPage] = useState("");
      const [loading, setLoading] = useState(true);
-     const url = `https://pokeapi.co/api/v2/pokemon/`;
+     const mainUrl = `https://pokeapi.co/api/v2/pokemon/`;
      useEffect(() => {
        async function getData() {
-         let response = await getAllPokemons(url);
+         let response = await getAllPokemons(mainUrl);
          console.log(response);
          setNextPage(response.next);
          setPrevPage(response.previous);
@@ -48,18 +48,34 @@ export default function Home() {
        setPokemon(pokeArr);
      };
 
+     const next = async () => {
+       setLoading(true);
+       let data = await getAllPokemons(nextPage);
+       await getPokemon(data.results);
+       setNextPage(data.next);
+       setPrevPage(data.previous);
+       setLoading(false);
+     };
+
+     const prev = async () => {
+       if (!prevPage) return;
+       setLoading(true);
+       let data = await getAllPokemons(prevPage);
+       await getPokemon(data.results);
+       setNextPage(data.next);
+       setPrevPage(data.previous);
+       setLoading(false);
+     };
+
      return loading ? (
        <p>Loading...</p>
      ) : (
        <div>
          {pokemon.map((pokemon, i) => {
-           return (
-             <Pokemon
-               key={i}
-               pokemon={pokemon}
-             />
-           );
+           return <Pokemon key={i} pokemon={pokemon} />;
          })}
+         <button onClick={next}>Next</button>
+         <button onClick={prev}>Prev</button>
        </div>
      );
 }
