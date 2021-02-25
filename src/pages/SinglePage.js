@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function SinglePage(props) {
   const [loading, setLoading] = useState(true);
@@ -6,8 +6,7 @@ export default function SinglePage(props) {
 
   useEffect(() => {
     async function getData() {
-      let response = await getPokemon(url);
-      console.log(response);
+      await getPokemon(url);
       setLoading(false);
     }
     getData();
@@ -19,7 +18,6 @@ export default function SinglePage(props) {
   const getPokemon = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     setPokemon(data);
     return data;
   };

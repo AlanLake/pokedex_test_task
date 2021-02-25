@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Pokemon from "../components/Pokemon";
-import { Link } from "react-router-dom";
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([]);
@@ -11,7 +10,6 @@ export default function Home() {
   useEffect(() => {
     async function getData() {
       let response = await getAllPokemons(mainUrl);
-      console.log(response);
       setNextPage(response.next);
       setPrevPage(response.previous);
       await getPokemon(response.results);
@@ -23,7 +21,6 @@ export default function Home() {
   const getAllPokemons = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return data;
   };
 
@@ -68,7 +65,7 @@ export default function Home() {
   };
 
   return loading ? (
-    <p className='loading'>
+    <p className="loading">
       <b>Loading...</b>
     </p>
   ) : (

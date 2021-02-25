@@ -18,14 +18,13 @@ export default function PokeList() {
   const getAllPokemons = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data.results.map(elem => console.log(elem.name)));
     return data.results;
   };
   console.log(pokemon.map((elem) => elem.name));
   return loading ? (
     <p>Loading..</p>
   ) : (
-    <div className='list'>
+    <div className="list">
       {pokemon.map((elem, i) => {
         return (
           <Link key={i} to={`/pokemon/${elem.name}`}>
