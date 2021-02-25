@@ -68,7 +68,9 @@ export default function Home() {
   };
 
   return loading ? (
-    <p>Loading...</p>
+    <p className='loading'>
+      <b>Loading...</b>
+    </p>
   ) : (
     <div>
       <div className="cards">
@@ -76,9 +78,9 @@ export default function Home() {
           return <Pokemon key={i} pokemon={pokemon} />;
         })}
       </div>
-      <div className='nav-buttons'>
-        <button onClick={prev}>Prev</button>
-        <button onClick={next}>Next</button>
+      <div className="nav-buttons">
+        <button onClick={prev}>Previous page</button>
+        <button onClick={next}>Next page</button>
       </div>
     </div>
   );
